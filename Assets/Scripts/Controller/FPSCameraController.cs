@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class FPSCameraController : MonoBehaviour
@@ -10,17 +11,21 @@ public class FPSCameraController : MonoBehaviour
 
     private float xRotation = 0.0f;
 
-    [SerializeField]
     private bool isReverse;
 
     [SerializeField]
     private float SightRadius = 90f;
+
+    [SerializeField]
+    private TMP_Text SightTMP;
 
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; //커서가 화면 중앙에 고정.
         Cursor.visible = false; //커서가 보이지 않도록 함
+        SightTMP.text = SightRadius.ToString();
+
     }
 
 
@@ -56,10 +61,12 @@ public class FPSCameraController : MonoBehaviour
     public void ChangeMouseReverse(bool isOn)
     {
         isReverse = isOn;
+        Debug.Log("isReverse : " + isReverse);
     }
-
+    
     public void ChangeSightRadius(float radiusRate)
     {
-        SightRadius = 180f * radiusRate;
+        SightRadius = 90f * radiusRate;
+        SightTMP.text = SightRadius.ToString();
     }
 }
