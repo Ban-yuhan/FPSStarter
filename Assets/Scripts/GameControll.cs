@@ -6,6 +6,7 @@ public class GameControll : MonoBehaviour
     [SerializeField]
     private GameObject Panel;
 
+
     //[SerializeField]
     //private FPSCameraController CameraCtrl;
 
@@ -34,6 +35,7 @@ public class GameControll : MonoBehaviour
             }
         }
 
+        
     }
 
     public void Resume()
