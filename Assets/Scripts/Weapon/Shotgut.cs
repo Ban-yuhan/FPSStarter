@@ -11,13 +11,13 @@ public class Shotgut : Weapon
         range = 30f;
         fireRate = 1f;
 
-        MaxBulletsCount = 8;
         ReloadCoolDown = 3f;
     }
 
 
     private void Awake()
     {
+        MaxBulletsCount = 8;
         base.Awake();
     }
 

@@ -8,12 +8,12 @@ public class Sniper : Weapon
         range = 300f;
         fireRate = 3f;
 
-        MaxBulletsCount = 12;
         ReloadCoolDown = 1.5f;
     }
 
     private void Awake()
     {
+        MaxBulletsCount = 12;
         base.Awake();
     }
 

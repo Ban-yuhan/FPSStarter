@@ -11,11 +11,10 @@ public class Rifle : Weapon //Weapon부모 클래스를 상속
         ReloadCoolDown = 1.5f;
     }
 
-    protected override void Awake()
+    private  void Awake()
     {
         MaxBulletsCount = 31;
         base.Awake();
-        BulletsCount = MaxBulletsCount;
     }
 
     private void Update()

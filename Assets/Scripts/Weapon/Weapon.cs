@@ -26,9 +26,11 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private TMP_Text RemainBullets;
 
-    
-    protected virtual void Awake()
+
+    protected void Awake()
     {
+        BulletsCount = MaxBulletsCount;
+
         CrossHair = GameObject.Find("CrossHair");
 
         GameObject TMPBulletsCount = GameObject.Find("BulletsCountText");
