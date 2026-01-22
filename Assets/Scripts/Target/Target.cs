@@ -1,7 +1,7 @@
 using UnityEngine;
 
 //데미지 적용 & 체력 0 이하로 떨어질 시 파괴처리
-public class Target : MonoBehaviour
+public class Target : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private float health = 50.0f;

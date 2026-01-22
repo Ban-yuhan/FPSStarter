@@ -38,7 +38,8 @@ public class Rifle : Weapon //Weapon부모 클래스를 상속
         if (isHit == true)
         {
             Debug.Log("소총 명중 : " + hit.transform.name); //명중한 대상의 이름 출력
-            Target target = hit.transform.GetComponent<Target>();
+            //Target target = hit.transform.GetComponent<Target>();
+            IDamageable target = hit.transform.GetComponent<IDamageable>();
 
             if (target != null)
             {
