@@ -16,14 +16,13 @@ public class Weapon : MonoBehaviour
     private bool isReloading;
 
     public Camera fpsCamera;
-    public ParticleSystem muzzleFlash; //총 발사 시 총구에서 보여줄 발사 이펙트
+
+    public GameObject hitEffectPrefab;
 
     private float nextFireTime = 0f;
 
-    [SerializeField]
     private GameObject CrossHair;
 
-    [SerializeField]
     private TMP_Text RemainBullets;
 
 
@@ -85,13 +84,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
-        if(muzzleFlash != null)
-        {
-            muzzleFlash.Play();
-        }
-
-        Debug.Log("기본 무기 발사");
-        --BulletsCount;
+            --BulletsCount;
     }
     
 
