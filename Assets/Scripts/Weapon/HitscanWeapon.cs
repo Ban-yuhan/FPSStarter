@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 
 public class HitscanWeapon : MonoBehaviour
 {
@@ -37,6 +39,9 @@ public class HitscanWeapon : MonoBehaviour
     private bool isReloading;
 
     private float nextTimetoFire = 0f; //쿨타임 계산을 위한 변수
+
+    public event Action OnEnemyHit;
+
 
 
     private void Awake()
@@ -130,8 +135,13 @@ public class HitscanWeapon : MonoBehaviour
             {
                 //hit.point : 충돌한 위치정보 -> 충돌한 위치에서 이펙트가 발생하도록
                 //uaternion.LookRotation(hit.normal) : 충돌 면을 바라보게끔 회전 -> 충돌면쪽으로 이펙트가 발생하도록 해줌
-                GameObject go = Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(go, 2.0f); //2초 정도 뒤에 파괴.
+                //GameObject go = Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(go, 2.0f); //2초 정도 뒤에 파괴.
+
+
+                PoolManager.Instance.SpawnFromPool("HitEffect", hit.point, Quaternion.LookRotation(hit.normal));
+                //hit.point : 충돌한 위치정보 -> 충돌한 위치에서 이펙트가 발생하도록
+                //uaternion.LookRotation(hit.normal) : 충돌 면에서 수직인 방향을 바라보게끔 회전 -> 충돌면쪽으로 이펙트가 발생하도록 해줌
             }
         }
 
@@ -142,5 +152,13 @@ public class HitscanWeapon : MonoBehaviour
     {
         BulletsCount = MaxBulletsCount;
     }
-    
+
+
+    public void TriggerEnemyHit()
+    {
+        if (OnEnemyHit != null)
+        {
+            OnEnemyHit.Invoke();
+        }
+    }
 }   

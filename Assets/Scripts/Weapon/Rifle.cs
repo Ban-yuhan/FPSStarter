@@ -53,6 +53,8 @@ public class Rifle : Weapon //Weapon부모 클래스를 상속
             if (target != null)
             {
                 target.TakeDamage(damage);
+
+                TriggerEnemyHit();
             }
         }
     }

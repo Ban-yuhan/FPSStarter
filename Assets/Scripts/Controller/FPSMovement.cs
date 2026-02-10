@@ -86,4 +86,14 @@ public class FPSMovement : MonoBehaviour
             JumpCount -= 1;
         }
     }
+
+
+    /// <summary>
+    /// 이동 중인지 여부 반환
+    /// </summary>
+    /// <returns></returns>
+    public bool IsMoving()
+    {
+        return controller.velocity.sqrMagnitude > 0.001f; //sqrMagnitude : 제곱된 크기 반환
+    }
 }

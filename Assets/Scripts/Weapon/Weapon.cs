@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Weapon : MonoBehaviour
 {
@@ -25,10 +26,20 @@ public class Weapon : MonoBehaviour
 
     private TMP_Text RemainBullets;
 
+    public event Action<int> OnBulletsChanged;
+
+    public event Action OnEnemyHit;
+
+    public AudioClip shootSound;
 
     protected void Awake()
     {
         BulletsCount = MaxBulletsCount;
+
+        if (OnBulletsChanged != null)
+        {
+            OnBulletsChanged.Invoke(MaxBulletsCount);
+        }
 
         CrossHair = GameObject.Find("CrossHair");
 
@@ -84,7 +95,13 @@ public class Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
-            --BulletsCount;
+        --BulletsCount;
+        if(OnBulletsChanged != null)
+        {
+            OnBulletsChanged.Invoke(BulletsCount);
+        }
+
+        SoundManager.instance.PlaySFX(shootSound);
     }
     
 
@@ -104,5 +121,17 @@ public class Weapon : MonoBehaviour
         BulletsCount = MaxBulletsCount;
         isReloading = false;
         ReloadTimer = 0f;
+    }
+
+
+    /// <summary>
+    /// 자식 클래스에서 적을 맞췄을 때 호출
+    /// </summary>
+    protected void TriggerEnemyHit()
+    {
+        if(OnEnemyHit != null)
+        {
+            OnEnemyHit.Invoke();
+        }
     }
 }
