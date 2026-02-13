@@ -83,6 +83,9 @@ public class ZombieFSM : MonoBehaviour, IDamageable
     private float hearingIdleTimer = 0.0f;
     private float hearingIdleDuration = 3.0f; //소리를 들은 후 5초 동안은 소리에 반응
 
+    [SerializeField]
+    private ParticleSystem MuzzleFlashHit;
+
 
     private void Start()
     {
@@ -380,6 +383,11 @@ public class ZombieFSM : MonoBehaviour, IDamageable
         if(currentState == EnemyState.Dead)
         {
             return;
+        }
+
+        if(MuzzleFlashHit != null)
+        {
+            MuzzleFlashHit.Play();
         }
 
         currentHealth -= damageAmount;

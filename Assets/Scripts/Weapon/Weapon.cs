@@ -20,6 +20,9 @@ public class Weapon : MonoBehaviour
 
     public GameObject hitEffectPrefab;
 
+    [SerializeField]
+    private ParticleSystem muzzleFlash; //후에 발사 이펙트를 추가하기 위한 변수
+
     private float nextFireTime = 0f;
 
     private GameObject CrossHair;
@@ -95,6 +98,7 @@ public class Weapon : MonoBehaviour
 
     public virtual void Shoot()
     {
+
         --BulletsCount;
         if(OnBulletsChanged != null)
         {
