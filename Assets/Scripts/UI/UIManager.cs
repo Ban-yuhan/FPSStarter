@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private HitscanWeapon hitscanWeapon;
 
+    [SerializeField]
+    private DamageVignette damageVignette;
+
     private Color originalCrosshairColor;
 
 
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour
         if(playerHealth != null)
         {
             playerHealth.OnHealthChanged += UpdateHealthUI;
+            playerHealth.OnHealthChanged += damageVignette.UpdateVignette;
         }
 
         if(currentWeapon != null)
