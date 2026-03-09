@@ -5,9 +5,9 @@ public class ZombieState
 {
     protected ZombieController zombie;
 
-    public ZombieState(ZombieController zombieCOntroller)
+    public ZombieState(ZombieController zombieController)
     {
-        zombie = zombieCOntroller;
+        zombie = zombieController;
     }
 
 

@@ -65,6 +65,8 @@ public class ZombieController : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
 
         ChangeState(new IdleState(this));
+        Debug.Log("현재상태 : " + currentState);
+
     }
 
 
@@ -87,6 +89,7 @@ public class ZombieController : MonoBehaviour, IDamageable
         }
         currentState = newState;
         currentState.Enter();
+       Debug.Log("현재상태 : " + currentState);
     }
 
 
@@ -114,7 +117,7 @@ public class ZombieController : MonoBehaviour, IDamageable
 
         currentHealth -= damageAmount;
 
-        if (!(currentState is ChaseState)&& !(currentState is AttackState))
+        if (!(currentState is ChaseState) && !(currentState is AttackState))
         {
             ChangeState(new ChaseState(this));
         }
