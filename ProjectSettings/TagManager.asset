@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - CinemachineTarget
+  - Dirt
+  - Metal
+  - Wood
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - Enemy
   - Ground
   - Obstacle
-  - 
-  - 
+  - Interactable
+  - Minimap
   - 
   - 
   - 

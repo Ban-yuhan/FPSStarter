@@ -152,4 +152,4 @@ MonoBehaviour:
   explosionRadius: 5
   explosionForce: 700
   damage: 50
-  explosionEffect: {fileID: 1620140131458704099, guid: 57e5b83dfee152a47aedf7d83c83e9f5, type: 3}
+  explosionEffect: {fileID: 0}

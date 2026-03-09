@@ -61,7 +61,7 @@ public class ZombieFSM : MonoBehaviour, IDamageable
     private float attackRate = 1.0f; //공격 속도(초당 공격 횟수)
 
     [SerializeField]
-    private float AttackDamaage = 10.0f; //공격 데미지
+    private float AttackDamage = 10.0f; //공격 데미지
 
     [SerializeField]
     private RagdollController ragdoll;
@@ -85,6 +85,13 @@ public class ZombieFSM : MonoBehaviour, IDamageable
 
     [SerializeField]
     private ParticleSystem MuzzleFlashHit;
+
+    [SerializeField]
+     private AudioClip WalkSound;
+
+    [SerializeField]
+    private float volume = 1f;
+
 
 
     private void Start()
@@ -238,14 +245,18 @@ public class ZombieFSM : MonoBehaviour, IDamageable
                 LastAttackTime = Time.time;
 
                 animator.SetTrigger("Attack");
-
-                IDamageable playerHealth = targetPlayer.GetComponent<IDamageable>();
-
-                if(playerHealth != null)
-                {
-                    playerHealth.TakeDamage(AttackDamaage);
-                }
             }
+        }
+    }
+
+
+    public void TakeDamage()
+    { 
+        IDamageable playerHealth = targetPlayer.GetComponent<IDamageable>();
+
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(AttackDamage);
         }
     }
 
@@ -432,4 +443,13 @@ public class ZombieFSM : MonoBehaviour, IDamageable
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, attackRange); 
     }
+
+    private void PlayWalkSound()
+    {
+        if(WalkSound != null)
+        {
+            AudioSource.PlayClipAtPoint(WalkSound, transform.position, volume);
+        }
+    }
+
 }

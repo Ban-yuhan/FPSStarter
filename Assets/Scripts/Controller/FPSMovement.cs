@@ -29,6 +29,14 @@ public class FPSMovement : MonoBehaviour
     [SerializeField]
     private CharacterController controller;
 
+    [SerializeField]
+    private FootStep footStep;
+
+    [SerializeField]
+    private float footStepInterval = 0.2f;
+
+    private float footStepTimer = 0.0f;
+
     private Vector3 velocity; //낙하 속도 지정을 위한 Vector3 변수
 
     private bool isGrounded;
@@ -47,19 +55,6 @@ public class FPSMovement : MonoBehaviour
             JumpCount = MaxJumpCount;
         }
 
-        PlayerMove();
-        
-        jump();
-        
-        velocity.y += gravity * Time.deltaTime; //점프후 천천히 내려오게 하기 위해 y축 속도에 매 프레임마다 중력 적용
-
-        // 낙하 이동 처리
-        controller.Move(velocity * Time.deltaTime);
-    }
-
-
-    void PlayerMove()
-    {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical"); //3D는 2D와 다르게 y축이아닌 z축으로 이동
 
@@ -70,9 +65,28 @@ public class FPSMovement : MonoBehaviour
         //GetKeyDown과 GetKey의 차이
         //GetKeyDown : 누른 그 프레임 한 번만 적용(누르고 있어도 누른 그 프레임만 적용)
         //GetKey : 누르고 있는 동안 적용
-        float speed = Input.GetKey(KeyCode.LeftControl)? moveSpeed*runMultiplier : moveSpeed;
-                
+        float speed = Input.GetKey(KeyCode.LeftControl) ? moveSpeed * runMultiplier : moveSpeed;
+
         controller.Move(move * speed * Time.deltaTime);
+
+        jump();
+        
+        velocity.y += gravity * Time.deltaTime; //점프후 천천히 내려오게 하기 위해 y축 속도에 매 프레임마다 중력 적용
+
+        // 낙하 이동 처리
+        controller.Move(velocity * Time.deltaTime);
+
+
+        if (x != 0.0f || z != 0.0f)
+        {
+            footStepTimer += Time.deltaTime;
+            if (footStepTimer > footStepInterval) 
+            {
+                PlayFootstep();
+                footStepTimer = 0.0f;
+            }
+
+        }
     }
 
 
@@ -96,4 +110,14 @@ public class FPSMovement : MonoBehaviour
     {
         return controller.velocity.sqrMagnitude > 0.001f; //sqrMagnitude : 제곱된 크기 반환
     }
+
+
+    void PlayFootstep()
+    {
+        if(footStep != null)
+        {
+            footStep.PlayFootStep();
+        }
+    }
+
 }
